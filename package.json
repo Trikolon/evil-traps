@@ -1,0 +1,29 @@
+{
+  "name": "evil-traps",
+  "version": "1.0.0",
+  "description": "Evil traps for Firefox.",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js --exec babel-node -- $NODE_DEBUG_OPTION"
+  },
+  "author": "Trikolon",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.4",
+    "express": "^4.16.4",
+    "nodemon": "^1.18.11"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.2"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ]
+  }
+}
