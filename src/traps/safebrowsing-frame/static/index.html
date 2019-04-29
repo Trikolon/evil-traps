@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Safebrowsing frame</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link xmlns="http://www.w3.org/1999/xhtml" rel="stylesheet" href="moz/blockedSite.css" type="text/css" media="all" />
+    <style>
+        #frame {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            border: none;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+
+            opacity: 0.3;
+        }
+        #errorPageContainer {
+            z-index: 0
+        }
+
+        /* Overwrite mozilla warning page styles to make it less scary */
+        html {
+            background-color: rgb(0, 65, 0);
+        }
+        .title {
+            background-image: url("chrome://global/skin/icons/info.svg");
+        }
+    </style>
+
+</head>
+<body>
+    <iframe id="frame" src="https://testsafebrowsing.appspot.com/s/phishing.html"></iframe>
+    <div xmlns="http://www.w3.org/1999/xhtml" id="errorPageContainer" class="container">
+
+        <!-- Error Title -->
+        <div id="errorTitle" class="title">
+          <h1 class="title-text" id="errorTitleText_phishing">We need your consent</h1>
+          
+          
+          
+        </div>
+  
+        <div id="errorLongContent">
+  
+          <!-- Short Description -->
+          <div id="errorShortDesc">
+            <p id="errorShortDescText_phishing">In order to continue, please read and accept our cookie policy, where we disclose how we manage your data. </p>
+
+
+            
+          </div>
+  
+          <!-- Advisory -->
+          <div id="advisoryDesc">
+            <p id="advisoryDescText">Advisory provided by <a id="advisory_provider" href="https://developers.google.com/safe-browsing/v4/advisory">Google Safe Browsing</a>.</p>
+          </div>
+  
+          <!-- Action buttons -->
+          <div id="buttons" class="button-container">
+            <!-- Commands handled in browser.js -->
+            <button id="goBackButton">Go back</button>
+            <button id="seeDetailsButton">Continue</button>
+          </div>
+        </div>
+        <div id="errorDescriptionContainer" >
+          <div class="error-description" id="errorLongDesc_phishing">
+            <p id="phishing_error_desc_override"><span id="phishing_sitename" class="sitename">testsafebrowsing.appspot.com</span> has been <a id="error_desc_link" href="https://safebrowsing.google.com/safebrowsing/diagnostic?client=%NAME%&amp;hl=%LOCALE%&amp;site=https%3A%2F%2Ftestsafebrowsing.appspot.com%2Fs%2Fphishing.html">reported as a great site</a>. You can <a id="report_detection" href="https://en-US.phish-error.mozilla.com/?hl=en-US&amp;url=https%3A%2F%2Ftestsafebrowsing.appspot.com%2Fs%2Fphishing.html">report a detection problem</a> or <a id="ignore_warning_link">Accept & Continue</a> and go to this very safe site.</p>
+
+            <p id="phishing_learn_more">Learn more about deceptive sites and phishing at <a id="learn_more_link" href="https://www.antiphishing.org//">www.antiphishing.org</a>. Learn more about Firefox’s Phishing and Malware Protection at <a id="firefox_support" href="https://support.mozilla.org/1/firefox/66.0.3/Linux/en-US/phishing-malware">support.mozilla.org</a>.</p>
+          </div>
+        </div>
+      </div>
+</body>
+</html>
