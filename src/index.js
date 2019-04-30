@@ -8,13 +8,21 @@ import fullscreenAddon from './traps/fullscreen-addon';
 import fullscreenTrap from './traps/fullscreen-trap';
 import promptSpam from './traps/prompt-spam';
 import safeBrowsingFrame from './traps/safebrowsing-frame';
+import historyDOS from './traps/historyDOS';
 
 const path = require('path');
 
 const trapPathPrefix = '/trap';
 
 // Evil traps (to be added here)
-const traps = [helloWorld, fullscreenAddon, fullscreenTrap, promptSpam, safeBrowsingFrame];
+const traps = [
+  helloWorld,
+  fullscreenAddon,
+  fullscreenTrap,
+  promptSpam,
+  safeBrowsingFrame,
+  historyDOS,
+];
 
 const app = express();
 

