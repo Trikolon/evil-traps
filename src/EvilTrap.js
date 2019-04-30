@@ -81,7 +81,7 @@ class EvilTrap {
 
 EvilTrap.CATEGORY = Object.freeze({
   SPAM: new EvilTrapCategory('Spam', 'Spams the user.'),
-  CRASH: new EvilTrapCategory('Crash', 'Crashes, freezes or slows the browser.'),
+  DOS: new EvilTrapCategory('DoS', 'Denial of Service: Crashes, freezes or slows the browser.'),
   MISC: new EvilTrapCategory('Misc'),
 });
 
