@@ -9,6 +9,7 @@ import fullscreenTrap from './traps/fullscreen-trap';
 import promptSpam from './traps/prompt-spam';
 import safeBrowsingFrame from './traps/safebrowsing-frame';
 import historyDOS from './traps/historyDOS';
+import iframeDOS from './traps/iframe-dos';
 
 const path = require('path');
 
@@ -22,6 +23,7 @@ const traps = [
   promptSpam,
   safeBrowsingFrame,
   historyDOS,
+  iframeDOS,
 ];
 
 const app = express();
