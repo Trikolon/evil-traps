@@ -1,30 +1,28 @@
+/* eslint-disable no-console */
 import express from 'express';
+import glob from 'glob';
 
 import EvilTrap from './EvilTrap';
 
-import helloWorld from './traps/hello-world';
-
-import fullscreenAddon from './traps/fullscreen-addon';
-import fullscreenTrap from './traps/fullscreen-trap';
-import promptSpam from './traps/prompt-spam';
-import safeBrowsingFrame from './traps/safebrowsing-frame';
-import historyDOS from './traps/historyDOS';
-import iframeDOS from './traps/iframe-dos';
-
 const path = require('path');
 
+// Base route for all trap routes
 const trapPathPrefix = '/trap';
 
-// Evil traps (to be added here)
-const traps = [
-  helloWorld,
-  fullscreenAddon,
-  fullscreenTrap,
-  promptSpam,
-  safeBrowsingFrame,
-  historyDOS,
-  iframeDOS,
-];
+
+/**
+ * Get all trap instances stored in ./traps.
+ *
+ * @returns {EvilTrap[]} - Array of trap objects.
+ */
+function getTraps() {
+  const files = glob.sync(path.join(__dirname, './traps/*/index.js'));
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  return files.map(f => require(f).default);
+}
+
+// Import evil traps from trap directory
+const traps = getTraps();
 
 const app = express();
 
@@ -52,4 +50,5 @@ app.get('/info', (req, res) => {
 const listener = app.listen(process.env.PORT || 8080, process.env.HOST || 'localhost', () => {
   const listenerAddr = listener.address();
   console.info(`Started server at ${listenerAddr.address}:${listenerAddr.port}`);
+  console.info('Traps', traps.map(trap => ({ name: trap.name, path: trap.path })));
 });
