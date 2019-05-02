@@ -7,6 +7,7 @@ const iframeClose = '"></iframe>';
 
 // Send endless stream of iframes with random base64 binaries
 function getHandler(req, res) {
+  res.setHeader('Content-Type', 'text/html');
   const stream = new Readable({
     read() {
       this.push(iframeOpen);
