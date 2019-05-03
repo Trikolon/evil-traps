@@ -1,9 +1,9 @@
 module.exports = function (api) {
-  api.cache(false);
+  api.cache(true);
 
   const presets = [['@babel/preset-env', {
     targets: {
-      node: '10',
+      node: '8',
     },
   }]];
   const plugins = [];
