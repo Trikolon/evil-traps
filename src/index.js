@@ -17,8 +17,15 @@ const trapPathPrefix = '/trap';
  */
 function getTraps() {
   const files = glob.sync(path.join(__dirname, './traps/*/index.js'));
-  // eslint-disable-next-line global-require, import/no-dynamic-require
-  return files.map(f => require(f).default);
+  return files.map((f) => {
+    try {
+      // eslint-disable-next-line import/no-dynamic-require,global-require
+      return require(f).default;
+    } catch (err) {
+      console.warn('Skipping failed import', err.message);
+      return null;
+    }
+  }).filter(f => f != null);
 }
 
 // Import evil traps from trap directory
