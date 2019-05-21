@@ -7,29 +7,29 @@
 let popupWindow;
 
 function makePopUp() {
-    popupWindow = window.open('about:blank','','height=1,width=500,top=0,left=700');
-    popupWindow.addEventListener('beforeunload', event => event.preventDefault());
+  popupWindow = window.open('about:blank', '', 'height=1,width=500,top=0,left=700');
+  popupWindow.addEventListener('beforeunload', event => event.preventDefault());
 }
 
 function focusPopUp() {
-  if(!popupWindow) {
-        return;
-    }
-    popupWindow.focus();
+  if (!popupWindow) {
+    return;
+  }
+  popupWindow.focus();
 }
 
 function combination() {
-    document.body.requestFullscreen();
-    makePopUp();
-    focusPopUp();
+  document.body.requestFullscreen();
+  makePopUp();
+  focusPopUp();
 }
 
 // When user tries to focus main window, keep popup in focus.z
 document.body.addEventListener('click', focusPopUp);
 document.body.addEventListener('mousedown', focusPopUp);
 document.body.addEventListener('contextmenu', (event) => {
-    event.preventDefault();
-    focusPopUp();
+  event.preventDefault();
+  focusPopUp();
 });
 </script>
 
