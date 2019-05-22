@@ -3,11 +3,12 @@
     <title>Cover Full-Screen UI</title>
 </head>
 <body>
+    <button>Click Me</button>
 <script>
 let popupWindow;
 
 function makePopUp() {
-  popupWindow = window.open('about:blank', '', 'height=1,width=500,top=0,left=700');
+  popupWindow = window.open('about:blank', '', `top=0,height=1,width=${window.screen.width}`);
   popupWindow.addEventListener('beforeunload', event => event.preventDefault());
 }
 
@@ -31,7 +32,7 @@ document.body.addEventListener('contextmenu', (event) => {
   event.preventDefault();
   focusPopUp();
 });
-</script>
 
-<button onclick="combination();">Click Me</button>
+document.querySelector('button').addEventListener('click', combination);
+</script>
 </body>
