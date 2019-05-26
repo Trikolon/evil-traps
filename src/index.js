@@ -57,5 +57,5 @@ app.get('/info', (req, res) => {
 const listener = app.listen(process.env.PORT || 8080, process.env.HOST || 'localhost', () => {
   const listenerAddr = listener.address();
   console.info(`Started server at ${listenerAddr.address}:${listenerAddr.port}`);
-  console.info('Traps', traps.map(trap => ({ name: trap.name, path: trap.path })));
+  console.info('Traps', traps.map(trap => ({ name: trap.name, path: trap.path, bugs: trap.bugs })));
 });
