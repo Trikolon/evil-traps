@@ -28,9 +28,11 @@ class EvilTrap {
    * @param {string} name - Human readable identifier of trap
    * @param {EvilTrapCategory} [category=EvilTrap.CATEGORY.MISC]
    * @param {string} [description] - Short info text about the trap
+   * @param {Object} [bugs] - A map of bug numbers to show alongside the evil trap,
+   *                          currently accepts only "firefox" keys.
    * @param {boolean} [unlisted = false] - Whether to hide the trap in navigation
    */
-  constructor(name, category = EvilTrap.CATEGORY.MISC, description, unlisted = false) {
+  constructor(name, category = EvilTrap.CATEGORY.MISC, description, bugs, unlisted = false) {
     if (typeof name !== 'string' || name.length === 0) {
       throw new Error('"name" is mandatory. Must be non empty string');
     }
@@ -40,6 +42,7 @@ class EvilTrap {
     this.name = name;
     this.category = category;
     this.description = description;
+    this.bugs = bugs;
     this.unlisted = unlisted;
   }
 

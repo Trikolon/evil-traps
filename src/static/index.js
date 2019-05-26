@@ -22,6 +22,24 @@
     el.querySelector('.refTitle').innerText = trap.name;
     el.querySelector('.refBody').innerText = trap.description;
 
+    if (trap.bugs) {
+      const container = document.createElement('span');
+
+      if (trap.bugs.firefox) {
+        const link = document.createElement('a');
+        link.href = `https://bugzilla.mozilla.org/show_bug.cgi?id=${trap.bugs.firefox}`;
+        link.target = '_blank';
+        const img = document.createElement('img');
+        img.src = '/bug-icons/firefox.ico';
+        link.appendChild(img);
+        container.appendChild(link);
+      }
+
+      if (container.childNodes.length > 0) {
+        el.querySelector('.bugs').appendChild(container);
+      }
+    }
+
     trapNav.appendChild(el);
   });
 })();
