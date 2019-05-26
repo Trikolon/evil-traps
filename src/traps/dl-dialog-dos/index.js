@@ -18,7 +18,7 @@ function getHandler(req, res) {
   stream.pipe(res);
 }
 
-export default new EvilTrap('Iframe DoS', EvilTrap.CATEGORY.DOS, 'Freeze / slow browser by spamming iframes with downloads.')
+export default new EvilTrap('Download Dialog DoS', EvilTrap.CATEGORY.DOS, 'Freeze / slow browser by spamming iframes with downloads.', { firefox: '1416761' })
   .routeBuilder((router) => {
     router.get('/', getHandler);
   });
