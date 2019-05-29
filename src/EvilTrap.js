@@ -5,11 +5,13 @@ class EvilTrapCategory {
   /**
    * @param {string} name
    * @param {string} [description]
+   * @param {boolean} [warn] - Wether user should be warned before opening traps from this category
    * @memberof EvilTrapCategory
    */
-  constructor(name, description) {
+  constructor(name, description, warn = false) {
     this.name = name;
     this.description = description;
+    this.warn = warn;
   }
 }
 
@@ -83,8 +85,9 @@ class EvilTrap {
 }
 
 EvilTrap.CATEGORY = Object.freeze({
+  DOS: new EvilTrapCategory('DoS', 'Denial of Service: Crashes, freezes or slows the browser.', true),
+  FULLSCREEN: new EvilTrapCategory('Full-Screen', 'Abuse full-screen to trap or phish the user.'),
   SPAM: new EvilTrapCategory('Spam', 'Spams the user.'),
-  DOS: new EvilTrapCategory('DoS', 'Denial of Service: Crashes, freezes or slows the browser.'),
   MISC: new EvilTrapCategory('Misc'),
 });
 

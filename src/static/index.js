@@ -1,5 +1,5 @@
 (async () => {
-  const trapNav = document.getElementById('trapNav');
+  const trapNav = document.getElementById('nav');
   const listEl = document.getElementById('listEl');
 
   // Fetch trap data from backend
@@ -8,10 +8,31 @@
     throw new Error('Received error code while fetching list of traps');
   }
   const info = await response.json();
-
   console.debug('Available traps', info);
 
-  // Build main nav
+  // Build categories nav
+  Object.values(info.categories).forEach((category) => {
+    const categoryEl = document.createElement('div');
+    categoryEl.id = category.name;
+    categoryEl.style.display = 'none';
+
+    const categoryListTitle = document.createElement('h2');
+    categoryListTitle.innerText = category.name;
+    categoryEl.appendChild(categoryListTitle);
+
+    if (category.description) {
+      const categoryListDescription = document.createElement('p');
+      categoryListDescription.innerText = category.description;
+      categoryEl.appendChild(categoryListDescription);
+    }
+
+    const categoryList = document.createElement('ul');
+    categoryEl.appendChild(categoryList);
+
+    trapNav.appendChild(categoryEl);
+  });
+
+  // Insert trap list into categories
   info.traps.forEach((trap) => {
     // Skip hidden traps
     if (trap.unlisted) return;
@@ -40,6 +61,10 @@
       }
     }
 
-    trapNav.appendChild(el);
+    const categoryEl = trapNav.querySelector(`#${trap.category.name}`);
+    const list = categoryEl.querySelector('ul');
+
+    list.appendChild(el);
+    categoryEl.style.display = 'initial';
   });
 })();
