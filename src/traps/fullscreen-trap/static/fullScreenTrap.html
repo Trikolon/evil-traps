@@ -30,7 +30,7 @@
 	  if (event && event instanceof Event) event.preventDefault();
 	  console.debug('requesting fullscreen and pointer lock', { event });
 	  document.body.requestFullscreen();
-	  // document.body.requestPointerLock();
+	  document.body.requestPointerLock();
 	}
 
 	function registerEventListeners() {
@@ -38,6 +38,8 @@
 	  document.addEventListener('keydown', fullscreen);
 	  document.addEventListener('mousedown', fullscreen);
 	  document.addEventListener('mouseup', fullscreen);
+	  document.addEventListener('pointerdown', fullscreen);
+	  document.addEventListener('pointerup', fullscreen);
 	  document.body.addEventListener('load', fullscreen);
 	  document.body.addEventListener('focus', fullscreen);
 	  document.body.addEventListener('fullscreenchange', fullscreen);
