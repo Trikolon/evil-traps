@@ -22,7 +22,7 @@ function getTraps() {
       // eslint-disable-next-line import/no-dynamic-require,global-require
       return require(f).default;
     } catch (err) {
-      console.warn('Skipping failed import', err.message);
+      console.warn('Skipping failed import', f, err.message);
       return null;
     }
   }).filter(f => f != null);
