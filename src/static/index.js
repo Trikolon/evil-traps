@@ -1,3 +1,39 @@
+/**
+ * Attaches a warning to a hyperlink requiring two clicks to follow it
+ *
+ * @param {*} clickEl - DOM element to trigger warning
+ * @param {*} textEl - DOM element which holds text to replace
+ * @param {String} message - Warning message.
+ */
+function attachWarn(clickEl, textEl, message) {
+  const el = clickEl;
+  const tEl = textEl;
+
+  el.dataset.preventClick = true;
+  el.addEventListener('click', (event) => {
+    if (!el.dataset.preventClick) {
+      return;
+    }
+    event.preventDefault();
+    delete el.dataset.preventClick;
+
+    const originalText = tEl.innerText;
+
+    function onCancelConfirm() {
+      tEl.innerText = originalText;
+      el.dataset.preventClick = true;
+
+      el.removeEventListener('blur', onCancelConfirm);
+      el.removeEventListener('click', onCancelConfirm);
+    }
+
+    el.addEventListener('blur', onCancelConfirm);
+    el.addEventListener('click', onCancelConfirm);
+
+    tEl.innerText = message;
+  });
+}
+
 (async () => {
   const trapNav = document.getElementById('nav');
   const listEl = document.getElementById('listEl');
@@ -39,7 +75,14 @@
 
     const el = listEl.content.cloneNode(true);
 
-    el.querySelector('a').href = info.trapPathPrefix + trap.path;
+    const ref = el.querySelector('a');
+    ref.href = info.trapPathPrefix + trap.path;
+
+    if (trap.category.warn) {
+      attachWarn(ref, ref.firstElementChild,
+        'Warning: This might disrupt or damage your browser. Click again to confirm.');
+    }
+
     el.querySelector('.refTitle').innerText = trap.name;
     el.querySelector('.refBody').innerText = trap.description;
 
