@@ -22,7 +22,7 @@ class EvilTrapCategory {
  */
 function nameToPath(name) {
   // Using encodeURIComponent to ensure valid paths
-  return `/${encodeURIComponent(name.toLowerCase().replace(' ', '-'))}/`;
+  return `/${encodeURIComponent(name.toLowerCase().replace(new RegExp('\\s', 'g'), '-'))}/`;
 }
 
 class EvilTrap {
@@ -87,7 +87,7 @@ class EvilTrap {
 EvilTrap.CATEGORY = Object.freeze({
   DOS: new EvilTrapCategory('DoS', 'Denial of Service: Crashes, freezes or slows the browser.', true),
   FULLSCREEN: new EvilTrapCategory('Full-Screen', 'Abuse full-screen to trap or phish the user.'),
-  SPAM: new EvilTrapCategory('Spam', 'Spams the user.'),
+  SPAM: new EvilTrapCategory('Spam'),
   MISC: new EvilTrapCategory('Misc'),
 });
 
