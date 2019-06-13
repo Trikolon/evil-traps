@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Full-screen Auth Prompt</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+        #message {
+            margin-top: 200px;
+        }
+    </style>
+</head>
+<body>
+    <button>Click Me</button>
+    <h1 id="message"></div>
+    <script>
+        const button = document.querySelector('button');
+
+        button.addEventListener('click', async () => {
+          button.style.display = 'none';
+          await document.body.requestFullscreen();
+
+          const iframe = document.createElement('iframe');
+          iframe.src = 'auth';
+          iframe.addEventListener('load', () => {
+            iframe.contentWindow.location.reload(true);
+          });
+          document.body.appendChild(iframe);
+        });
+    </script>
+</body>
+</html>
