@@ -34,6 +34,29 @@ function attachWarn(clickEl, textEl, message) {
   });
 }
 
+
+/**
+ * Get bug open status from Bugzilla REST API
+ *
+ * @param {String} bugNumber
+ * @returns {null|Boolean} Status of bug or null if not found
+ */
+async function bugzillaGetBugState(bugNumber) {
+  const response = await fetch(`https://bugzilla.mozilla.org/rest/bug/${bugNumber}?include_fields=is_open`);
+  if (!response.ok) {
+    if (response.status === 404) {
+      return null;
+    }
+    throw new Error('Error while contacting Bugzilla API');
+  }
+  const info = await response.json();
+
+  if (info.bugs.length === 0) {
+    return null;
+  }
+  return info.bugs[0].is_open;
+}
+
 (async () => {
   const trapNav = document.getElementById('nav');
   const listEl = document.getElementById('listEl');
@@ -94,7 +117,17 @@ function attachWarn(clickEl, textEl, message) {
         link.href = `https://bugzilla.mozilla.org/show_bug.cgi?id=${trap.bugs.firefox}`;
         link.target = '_blank';
         const img = document.createElement('img');
+        img.title = `Bugzilla Bug ${trap.bugs.firefox}`;
         img.src = '/bug-icons/firefox.ico';
+
+        bugzillaGetBugState(trap.bugs.firefox)
+          .then((status) => {
+            if (status === false) {
+              img.style.filter = 'grayscale(100%)';
+            }
+          })
+          .catch(error => console.error('Error while getting Bugzilla bug info', error));
+
         link.appendChild(img);
         container.appendChild(link);
       }
