@@ -82,6 +82,46 @@ class EvilTrap {
     this.router.use(mountPath, express.static(sourcePath));
     return this;
   }
+
+
+  /**
+   * Add a page which runs a JS payload
+   * TODO: add support for reading script from JS file (script as path string).
+   * @param {string|Function} script - Function string or Function to run on page load
+   *                                   (injected as script tag in body).
+   * @param {string} [mountPath='/'] - Where to register the route relative to the trap base route.
+   * @param {string} [pageTitle=this.name] - Title of HTML page.
+   * @returns {EvilTrap} - Current EvilTrap instance.
+   * @memberof EvilTrap
+   */
+  addScriptPage(script, mountPath = '/', pageTitle = this.name) {
+    let scriptStr;
+    if (typeof script === 'string') {
+      scriptStr = script;
+    } else if (script instanceof Function) {
+      scriptStr = `(${script.toString()})()`;
+    } else {
+      throw new Error('Invalid argument "script", expected string or Function');
+    }
+
+    const body = `<html>
+                    <head>
+                      <title>${pageTitle}</title>
+                    </head>
+                    <body>
+                      <script>
+                        ${scriptStr}
+                      </script>
+                    </body>
+                  </html>`;
+    this.routeBuilder((builder) => {
+      builder.get(mountPath, (req, res) => {
+        res.set('Content-Type', 'text/html');
+        res.status(200).send(body);
+      });
+    });
+    return this;
+  }
 }
 
 EvilTrap.CATEGORY = Object.freeze({
