@@ -87,6 +87,7 @@ async function bugzillaGetBugInfo(bugNumber) {
     }
 
     const categoryList = document.createElement('ul');
+    categoryList.classList.add('categoryList');
     categoryEl.appendChild(categoryList);
 
     trapNav.appendChild(categoryEl);
