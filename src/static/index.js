@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Attaches a warning to a hyperlink requiring two clicks to follow it
  *
@@ -36,13 +37,13 @@ function attachWarn(clickEl, textEl, message) {
 
 
 /**
- * Get bug open status from Bugzilla REST API
+ * Get bug info from Bugzilla REST API
  *
  * @param {String} bugNumber
- * @returns {null|Boolean} Status of bug or null if not found
+ * @returns {null|Object} Info object of bug or null if not found
  */
-async function bugzillaGetBugState(bugNumber) {
-  const response = await fetch(`https://bugzilla.mozilla.org/rest/bug/${bugNumber}?include_fields=is_open`);
+async function bugzillaGetBugInfo(bugNumber) {
+  const response = await fetch(`https://bugzilla.mozilla.org/rest/bug/${bugNumber}?include_fields=is_open,summary`);
   if (!response.ok) {
     if (response.status === 404) {
       return null;
@@ -54,7 +55,7 @@ async function bugzillaGetBugState(bugNumber) {
   if (info.bugs.length === 0) {
     return null;
   }
-  return info.bugs[0].is_open;
+  return { isOpen: info.bugs[0].is_open, summary: info.bugs[0].summary };
 }
 
 (async () => {
@@ -117,13 +118,16 @@ async function bugzillaGetBugState(bugNumber) {
         link.href = `https://bugzilla.mozilla.org/show_bug.cgi?id=${trap.bugs.firefox}`;
         link.target = '_blank';
         const img = document.createElement('img');
-        img.title = `Bugzilla Bug ${trap.bugs.firefox}`;
+        img.title = `Firefox Bug ${trap.bugs.firefox}`;
         img.src = '/bug-icons/firefox.ico';
 
-        bugzillaGetBugState(trap.bugs.firefox)
-          .then((status) => {
-            if (status === false) {
+        bugzillaGetBugInfo(trap.bugs.firefox)
+          .then(({ isOpen, summary }) => {
+            if (isOpen === false) {
               img.style.filter = 'grayscale(100%)';
+            }
+            if (summary) {
+              img.title += ` - ${summary}`;
             }
           })
           .catch(error => console.error('Error while getting Bugzilla bug info', error));
