@@ -35,6 +35,22 @@ function attachWarn(clickEl, textEl, message) {
   });
 }
 
+function createRefIcon(href, title, iconSrc, buildFn) {
+  const link = document.createElement('a');
+  link.href = href;
+  link.target = '_blank';
+  const img = document.createElement('img');
+  img.title = title;
+  img.src = iconSrc;
+
+  link.appendChild(img);
+
+  if (buildFn) {
+    buildFn({ link, img });
+  }
+  return link;
+}
+
 
 /**
  * Get bug info from Bugzilla REST API
@@ -111,34 +127,45 @@ async function bugzillaGetBugInfo(bugNumber) {
     el.querySelector('.refTitle').innerText = trap.name;
     el.querySelector('.refBody').innerText = trap.description;
 
+    if (trap.srcRef) {
+      const refIcon = createRefIcon(trap.srcRef, 'View Source',
+        '/icons/github-src.png',
+        ({ img }) => {
+          img.classList.add('dark-invert');
+        });
+      const container = document.createElement('span');
+      container.appendChild(refIcon);
+      el.querySelector('.iconNav').appendChild(container);
+    }
+
     if (trap.bugs) {
       const container = document.createElement('span');
 
       if (trap.bugs.firefox) {
-        const link = document.createElement('a');
-        link.href = `https://bugzilla.mozilla.org/show_bug.cgi?id=${trap.bugs.firefox}`;
-        link.target = '_blank';
-        const img = document.createElement('img');
-        img.title = `Firefox Bug ${trap.bugs.firefox}`;
-        img.src = '/bug-icons/firefox.ico';
-
-        bugzillaGetBugInfo(trap.bugs.firefox)
-          .then(({ isOpen, summary }) => {
-            if (isOpen === false) {
-              img.style.filter = 'grayscale(100%)';
-            }
-            if (summary) {
-              img.title += ` - ${summary}`;
-            }
-          })
-          .catch(error => console.error('Error while getting Bugzilla bug info', error));
-
-        link.appendChild(img);
-        container.appendChild(link);
+        const refIcon = createRefIcon(
+          `https://bugzilla.mozilla.org/show_bug.cgi?id=${trap.bugs.firefox}`,
+          `Firefox Bug ${trap.bugs.firefox}`,
+          '/icons/firefox.ico',
+          ({ img }) => {
+            bugzillaGetBugInfo(trap.bugs.firefox)
+              .then(({ isOpen, summary }) => {
+                if (isOpen === false) {
+                  // eslint-disable-next-line no-param-reassign
+                  img.style.filter = 'grayscale(100%)';
+                }
+                if (summary) {
+                  // eslint-disable-next-line no-param-reassign
+                  img.title += ` - ${summary}`;
+                }
+              })
+              .catch(error => console.error('Error while getting Bugzilla bug info', error));
+          },
+        );
+        container.appendChild(refIcon);
       }
 
       if (container.childNodes.length > 0) {
-        el.querySelector('.bugs').appendChild(container);
+        el.querySelector('.iconNav').appendChild(container);
       }
     }
 

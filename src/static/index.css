@@ -8,8 +8,17 @@ body {
     margin-top: 0.25em;
 }
 
-.bugs {
-    margin-inline-start: 8px;
+.iconNav {
+    margin-inline-start: 0.5em;
+}
+
+.iconNav > span {
+    margin-right: 0.25em;
+}
+
+.iconNav * img {
+    height: 1em;
+    width: 1em;
 }
 
 .github-corner svg {
@@ -53,8 +62,7 @@ body {
         color: cornflowerblue;
     }
 
-    .github-corner svg {
-        color: black;
-        fill: white;
+    .dark-invert {
+        filter: invert();
     }
 }

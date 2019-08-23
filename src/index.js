@@ -9,6 +9,8 @@ const path = require('path');
 // Base route for all trap routes
 const trapPathPrefix = '/trap';
 
+// GitHub url to trap source directory
+const repoTrapUrl = 'https://github.com/Trikolon/evil-traps/tree/master/src/traps/';
 
 /**
  * Get all trap instances stored in ./traps.
@@ -20,7 +22,9 @@ function getTraps() {
   return files.map((f) => {
     try {
       // eslint-disable-next-line import/no-dynamic-require,global-require
-      return require(f).default;
+      const trap = require(f).default;
+      trap.srcRef = repoTrapUrl + path.basename(path.dirname(f));
+      return trap;
     } catch (err) {
       console.warn('Skipping failed import', f, err.message);
       return null;

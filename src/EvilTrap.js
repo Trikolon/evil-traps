@@ -46,6 +46,8 @@ class EvilTrap {
     this.description = description;
     this.bugs = bugs;
     this.unlisted = unlisted;
+
+    this.srcRef = null;
   }
 
 
