@@ -9,6 +9,7 @@
     "build": "babel src -d dist --copy-files"
   },
   "author": "Trikolon",
+  "repository": "github:Trikolon/evil-traps",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
