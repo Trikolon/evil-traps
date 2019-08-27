@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /**
  * Attaches a warning to a hyperlink requiring two clicks to follow it
  *

@@ -1,6 +1,6 @@
 import EvilTrap from '../../EvilTrap';
 
-export default new EvilTrap('Navigation Block', EvilTrap.CATEGORY.MISC, 'Abuses unload event to prevent user from navigating away from the site or reporting it to SafeBrowsing.', {firefox: '1263100'})
+export default new EvilTrap('Navigation Block', EvilTrap.CATEGORY.MISC, 'Abuses unload event to prevent user from navigating away from the site or reporting it to SafeBrowsing.', { firefox: '1263100' })
   .addScriptPage(() => {
     const storageKey = 'unloadTriggered';
 
