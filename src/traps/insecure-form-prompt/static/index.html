@@ -7,9 +7,18 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
-  <form id="theform" action="http://eviltraps.site/trap/insecure-form-prompt/redirect.html" />
   <script>
-    setInterval(function() { theform.submit() }, 10);
+
+    // Make sure the page is loaded via https
+    if (window.location.protocol === 'http') {
+      window.location.protocol = 'https';
+    }
+
+    // Create a form which submits to a http page
+    const form = document.createElement('form');
+    form.action = `http://${window.location.host}${window.location.pathname}redirect.html`;
+    document.body.appendChild(form);
+    setInterval(() => { form.submit(); }, 10);
   </script>
 </body>
 </html>
