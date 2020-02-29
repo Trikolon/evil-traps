@@ -1,6 +1,6 @@
-import EvilTrap from '../../EvilTrap';
+const EvilTrap = require('../../EvilTrap');
 
-export default new EvilTrap('Confirm Auth Prompt Spam', EvilTrap.CATEGORY.SPAM,
+module.exports = new EvilTrap('Confirm Auth Prompt Spam', EvilTrap.CATEGORY.SPAM,
   'Spam with auth confirmations prompts.', { firefox: '1571003' })
   .addScriptPage((() => {
     const nextLocation = window.location.href

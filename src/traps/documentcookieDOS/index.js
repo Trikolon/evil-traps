@@ -1,7 +1,7 @@
-import EvilTrap from '../../EvilTrap';
+const EvilTrap = require('../../EvilTrap');
 
 
-export default new EvilTrap('document.cookie DoS', EvilTrap.CATEGORY.DOS, 'Setting document.cookie in a loop spams the browser.', { firefox: '1520489' })
+module.exports = new EvilTrap('document.cookie DoS', EvilTrap.CATEGORY.DOS, 'Setting document.cookie in a loop spams the browser.', { firefox: '1520489' })
   .addScriptPage(() => {
     // eslint-disable-next-line no-constant-condition
     while (true) {

@@ -1,6 +1,6 @@
-import EvilTrap from '../../EvilTrap';
-
 const { Readable } = require('stream');
+const EvilTrap = require('../../EvilTrap');
+
 
 const iframeOpen = '<iframe src="data:application/octet-stream;base64,';
 const iframeClose = '"></iframe>';
@@ -18,7 +18,7 @@ function getHandler(req, res) {
   stream.pipe(res);
 }
 
-export default new EvilTrap('Download Dialog DoS', EvilTrap.CATEGORY.DOS, 'Freeze / slow browser by spamming iframes with downloads.', { firefox: '1416761' })
+module.exports = new EvilTrap('Download Dialog DoS', EvilTrap.CATEGORY.DOS, 'Freeze / slow browser by spamming iframes with downloads.', { firefox: '1416761' })
   .routeBuilder((router) => {
     router.get('/', getHandler);
   });

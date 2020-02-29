@@ -2,7 +2,7 @@
 A collection of web experiments that slow / crash the browser or annoy, spam or phish the user by exploiting bugs.
 
 ## Setup
-Node v10 or higher recommended.
+Node v12 or higher recommended.
 
 Install dependencies:
 ```
@@ -10,12 +10,12 @@ npm install
 ```
 
 ## Deploy
-In order to run, you need to build the files once:
+Install production dependencies
 ```
-npm run build
+npm ci --only=production
 ```
 
-Then you can start the application:
+Start the server with:
 ```
 npm start
 ```

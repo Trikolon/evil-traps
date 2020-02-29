@@ -1,6 +1,6 @@
-import EvilTrap from '../../EvilTrap';
+const EvilTrap = require('../../EvilTrap');
 
-export default new EvilTrap('Fullscreen Permission Prompt', EvilTrap.CATEGORY.FULLSCREEN, null, { firefox: '1522120' })
+module.exports = new EvilTrap('Fullscreen Permission Prompt', EvilTrap.CATEGORY.FULLSCREEN, null, { firefox: '1522120' })
   .addScriptPage(() => {
     const msg = document.createElement('h1');
     msg.style['background-color'] = 'white';

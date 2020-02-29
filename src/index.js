@@ -1,12 +1,11 @@
-import express from 'express';
-import glob from 'glob';
-
-import EvilTrap from './EvilTrap';
-
+const express = require('express');
+const glob = require('glob');
 const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+
+const EvilTrap = require('./EvilTrap');
 
 // HTTP server defaults
 const DEFAULT_HOST = 'localhost';
@@ -29,7 +28,7 @@ function getTraps() {
   return files.map((f) => {
     try {
       // eslint-disable-next-line import/no-dynamic-require,global-require
-      const trap = require(f).default;
+      const trap = require(f);
       trap.srcRef = REPO_TRAP_URL + path.basename(path.dirname(f));
       return trap;
     } catch (err) {

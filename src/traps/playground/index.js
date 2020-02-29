@@ -1,6 +1,6 @@
-import EvilTrap from '../../EvilTrap';
-
 const path = require('path');
+const EvilTrap = require('../../EvilTrap');
 
-export default new EvilTrap('Playground', undefined, undefined, undefined, true)
+
+module.exports = new EvilTrap('Playground', undefined, undefined, undefined, true)
   .addStaticRoute('/', path.join(__dirname, 'static'));

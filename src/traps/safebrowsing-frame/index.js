@@ -1,6 +1,6 @@
-import EvilTrap from '../../EvilTrap';
-
 const path = require('path');
+const EvilTrap = require('../../EvilTrap');
 
-export default new EvilTrap('Safebrowsing Frame', EvilTrap.CATEGORY.MISC, 'Embeds an iframe with a safebrowsing blacklisted site.', { firefox: '1195242' })
+
+module.exports = new EvilTrap('Safebrowsing Frame', EvilTrap.CATEGORY.MISC, 'Embeds an iframe with a safebrowsing blacklisted site.', { firefox: '1195242' })
   .addStaticRoute('/', path.join(__dirname, 'static'));

@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express');
 
 
 class EvilTrapCategory {
@@ -133,4 +133,4 @@ EvilTrap.CATEGORY = Object.freeze({
   MISC: new EvilTrapCategory('Misc'),
 });
 
-export default EvilTrap;
+module.exports = EvilTrap;

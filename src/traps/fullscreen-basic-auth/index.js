@@ -1,6 +1,6 @@
-import EvilTrap from '../../EvilTrap';
+const EvilTrap = require('../../EvilTrap');
 
-export default new EvilTrap('Full-screen Auth Prompt', EvilTrap.CATEGORY.FULLSCREEN, 'Use HTTP Basic Auth prompts to trap the user in full-screen.')
+module.exports = new EvilTrap('Full-screen Auth Prompt', EvilTrap.CATEGORY.FULLSCREEN, 'Use HTTP Basic Auth prompts to trap the user in full-screen.')
   .addScriptPage(() => {
     const button = document.createElement('button');
     button.innerText = 'Click Me';

@@ -1,6 +1,6 @@
-import EvilTrap from '../../EvilTrap';
+const EvilTrap = require('../../EvilTrap');
 
-export default new EvilTrap('Permission Prompt Spam', EvilTrap.CATEGORY.SPAM, 'Spam the user with notification permission prompts.', { firefox: '1492668' })
+module.exports = new EvilTrap('Permission Prompt Spam', EvilTrap.CATEGORY.SPAM, 'Spam the user with notification permission prompts.', { firefox: '1492668' })
   .addScriptPage(async () => {
     const domainNoEnd = 5;
 

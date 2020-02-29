@@ -1,6 +1,6 @@
-import EvilTrap from '../../EvilTrap';
+const EvilTrap = require('../../EvilTrap');
 
-export default new EvilTrap('Insecure Form Submission Prompt Spam', EvilTrap.CATEGORY.SPAM,
+module.exports = new EvilTrap('Insecure Form Submission Prompt Spam', EvilTrap.CATEGORY.SPAM,
   'Spam with insecure form submission prompts.', { firefox: '616849' })
   .addScriptPage(() => {
     // Make sure the page is loaded via https
