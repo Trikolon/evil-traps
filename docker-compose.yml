@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    environment:
+      - ENABLE_IPV6=true
+
+  eviltraps:
+    build: .
+    environment:
+      - VIRTUAL_HOST=eviltrap.site,*.eviltrap.site
+      - VIRTUAL_PORT=8080
