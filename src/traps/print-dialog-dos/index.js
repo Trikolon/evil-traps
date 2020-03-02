@@ -9,6 +9,6 @@ async function printSpam() {
   }
 }
 
-module.exports = new EvilTrap('Print Dialog DoS', EvilTrap.CATEGORY.DOS,
+module.exports = new EvilTrap('Print Dialog DoS', EvilTrap.CATEGORY.PROMPTSPAM,
   'Spam print requests leading to error prompts which steal main window focus. Built in rate limit does not apply to errors prompts.', { firefox: '1311596' })
   .addScriptPage(printSpam);

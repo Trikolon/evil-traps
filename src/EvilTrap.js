@@ -9,6 +9,7 @@ class EvilTrapCategory {
    * @memberof EvilTrapCategory
    */
   constructor(name, description, warn = false) {
+    this.id = name.replace(' ', '-');
     this.name = name;
     this.description = description;
     this.warn = warn;
@@ -128,8 +129,8 @@ class EvilTrap {
 
 EvilTrap.CATEGORY = Object.freeze({
   DOS: new EvilTrapCategory('DoS', 'Denial of Service: Crashes, freezes or slows the browser.', true),
-  FULLSCREEN: new EvilTrapCategory('Full-Screen', 'Abuse full-screen to trap or phish the user.'),
-  SPAM: new EvilTrapCategory('Spam'),
+  FULLSCREEN: new EvilTrapCategory('Fullscreen', 'Abuse full-screen to trap or phish the user.'),
+  PROMPTSPAM: new EvilTrapCategory('Prompt Spam', null, true),
   MISC: new EvilTrapCategory('Misc'),
 });
 
