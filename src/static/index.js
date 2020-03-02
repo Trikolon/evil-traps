@@ -88,7 +88,7 @@ async function bugzillaGetBugInfo(bugNumber) {
   // Build categories nav
   Object.values(info.categories).forEach((category) => {
     const categoryEl = document.createElement('div');
-    categoryEl.id = category.name;
+    categoryEl.id = category.id;
     categoryEl.style.display = 'none';
 
     const categoryListTitle = document.createElement('h2');
@@ -168,7 +168,7 @@ async function bugzillaGetBugInfo(bugNumber) {
       }
     }
 
-    const categoryEl = trapNav.querySelector(`#${trap.category.name}`);
+    const categoryEl = trapNav.querySelector(`#${trap.category.id}`);
     const list = categoryEl.querySelector('ul');
 
     list.appendChild(el);
