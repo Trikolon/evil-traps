@@ -131,6 +131,7 @@ EvilTrap.CATEGORY = Object.freeze({
   DOS: new EvilTrapCategory('DoS', 'Denial of Service: Crashes, freezes or slows the browser.', true),
   FULLSCREEN: new EvilTrapCategory('Fullscreen', 'Abuse full-screen to trap or phish the user.'),
   PROMPTSPAM: new EvilTrapCategory('Prompt Spam', null, true),
+  SPOOF: new EvilTrapCategory('Spoofing', null),
   MISC: new EvilTrapCategory('Misc'),
 });
 
