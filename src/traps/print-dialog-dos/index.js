@@ -5,7 +5,7 @@ async function printSpam() {
   while (true) {
     window.print();
     // eslint-disable-next-line no-await-in-loop
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 100));
   }
 }
 

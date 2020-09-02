@@ -1,6 +1,5 @@
 const EvilTrap = require('../../EvilTrap');
 
-
 module.exports = new EvilTrap('Blob URL DoS', EvilTrap.CATEGORY.DOS, null, { firefox: '1438214' })
 // Source: https://gist.github.com/pwnsdx/d20a99c0500d6f05993ef730bef26746
   .addScriptPage(() => {

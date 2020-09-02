@@ -1,7 +1,6 @@
 const { Readable } = require('stream');
 const EvilTrap = require('../../EvilTrap');
 
-
 const iframeOpen = '<iframe src="data:application/xyz,';
 const iframeClose = '"></iframe>';
 

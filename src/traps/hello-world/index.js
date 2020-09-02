@@ -1,7 +1,6 @@
 const path = require('path');
 const EvilTrap = require('../../EvilTrap');
 
-
 function getHandler(req, res) {
   res.status(200).send('This is the hello world GET handler. <br> <a href="static">Check out the static stuff</a>');
 }

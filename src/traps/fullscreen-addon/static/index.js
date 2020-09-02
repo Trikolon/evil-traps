@@ -1,4 +1,4 @@
-const delay = ms => new Promise(r => setTimeout(r, ms));
+const delay = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function install() {
   window.location = 'addon.xpi';

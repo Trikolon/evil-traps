@@ -1,20 +1,5 @@
 const express = require('express');
-
-
-class EvilTrapCategory {
-  /**
-   * @param {string} name
-   * @param {string} [description]
-   * @param {boolean} [warn] - Wether user should be warned before opening traps from this category
-   * @memberof EvilTrapCategory
-   */
-  constructor(name, description, warn = false) {
-    this.id = name.replace(' ', '-');
-    this.name = name;
-    this.description = description;
-    this.warn = warn;
-  }
-}
+const EvilTrapCategory = require('./EvilTrapCategory');
 
 /**
  * Convert evil trap name to path suitable for express route.
@@ -51,7 +36,6 @@ class EvilTrap {
     this.srcRef = null;
   }
 
-
   /**
    * Configure http routes for evil trap.
    * @param {Function} routeBuilder - Function to be called with router object
@@ -65,7 +49,6 @@ class EvilTrap {
     routeBuilder(this.router);
     return this;
   }
-
 
   /**
    * Add a http route to serve static files.
@@ -85,7 +68,6 @@ class EvilTrap {
     this.router.use(mountPath, express.static(sourcePath));
     return this;
   }
-
 
   /**
    * Add a page which runs a JS payload

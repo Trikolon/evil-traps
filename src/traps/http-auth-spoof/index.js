@@ -1,6 +1,5 @@
 const EvilTrap = require('../../EvilTrap');
 
-
 module.exports = new EvilTrap('HTTP Auth Prompt Spoof', EvilTrap.CATEGORY.SPOOF, 'Show HTTP auth prompt on top of foreign site.', { firefox: '791594' })
   .addScriptPage(() => {
     const button = document.createElement('button');

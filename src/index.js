@@ -35,9 +35,8 @@ function getTraps() {
       console.warn('Skipping failed import', f, err.message);
       return null;
     }
-  }).filter(f => f != null);
+  }).filter((f) => f != null);
 }
-
 
 (() => {
   process.on('SIGINT', () => {
@@ -56,7 +55,6 @@ function getTraps() {
   });
   app.use(TRAP_PATH_PREFIX, trapRouter);
 
-
   // Route for static files for landing page
   app.use('/', express.static(path.join(__dirname, 'static')));
 
@@ -69,7 +67,7 @@ function getTraps() {
     });
   });
 
-  console.info('Traps', traps.map(trap => ({ name: trap.name, path: trap.path, bugs: trap.bugs })));
+  console.info('Traps', traps.map((trap) => ({ name: trap.name, path: trap.path, bugs: trap.bugs })));
 
   // Start http server
   const httpServer = http.createServer(app);

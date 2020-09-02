@@ -50,7 +50,6 @@ function createRefIcon(href, title, iconSrc, buildFn) {
   return link;
 }
 
-
 /**
  * Get bug info from Bugzilla REST API
  *
@@ -157,7 +156,7 @@ async function bugzillaGetBugInfo(bugNumber) {
                   img.title += ` - ${summary}`;
                 }
               })
-              .catch(error => console.error('Error while getting Bugzilla bug info', error));
+              .catch((error) => console.error('Error while getting Bugzilla bug info', error));
           },
         );
         container.appendChild(refIcon);
