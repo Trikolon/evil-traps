@@ -13,14 +13,14 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
-    "glob": "^7.1.4"
+    "glob": "^7.1.6"
   },
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-plugin-html": "^5.0.5",
-    "eslint-plugin-import": "^2.18.2",
-    "nodemon": "^1.19.1"
+    "eslint": "^7.8.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-html": "^6.0.3",
+    "eslint-plugin-import": "^2.22.0",
+    "nodemon": "^2.0.4"
   },
   "nodemonConfig": {
     "watch": [
