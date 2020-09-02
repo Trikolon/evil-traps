@@ -40,6 +40,10 @@ function getTraps() {
 
 
 (() => {
+  process.on('SIGINT', () => {
+    process.exit();
+  });
+
   // Import evil traps from trap directory
   const traps = getTraps();
 
