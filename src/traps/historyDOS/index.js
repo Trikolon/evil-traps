@@ -6,8 +6,12 @@ module.exports = new EvilTrap('History.pushState DoS', EvilTrap.CATEGORY.DOS, 'F
     let i = 0;
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      str += i.toString();
-      window.history.pushState(0, 0, str);
-      i += 1;
+      try {
+        str += i.toString();
+        window.history.pushState(0, 0, str);
+        i += 1;
+      } catch (err) {
+        // Ignore any errors and keep calling pushState.
+      }
     }
   });
