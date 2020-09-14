@@ -32,8 +32,8 @@ services:
       NGINX_PROXY_CONTAINER: nginx-proxy
   eviltraps:
     container_name: eviltraps
+    image: "docker.pkg.github.com/trikolon/evil-traps/eviltraps:master"
     restart: always
-    build: .
     environment:
       - VIRTUAL_HOST=eviltrap.site,*.eviltrap.site
       - VIRTUAL_PORT=8080

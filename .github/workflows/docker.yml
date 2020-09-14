@@ -1,0 +1,18 @@
+# Build docker image from master and push it to GitHub packages
+name: Docker
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: package docker
+        run: |
+          docker login docker.pkg.github.com --username Trikolon --password ${{ secrets.GITHUB_TOKEN }}
+          docker build . --file Dockerfile --tag docker.pkg.github.com/trikolon/evil-traps/eviltraps:master
+          docker push docker.pkg.github.com/trikolon/evil-traps/eviltraps:master
+        env:
+          CI: true
