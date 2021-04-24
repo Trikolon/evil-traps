@@ -2,7 +2,7 @@
 A collection of web experiments that slow / crash the browser or annoy, spam or phish the user by exploiting bugs.
 
 ## Setup
-Node v12 or higher recommended.
+Node v14 or higher recommended.
 
 Install dependencies:
 ```
