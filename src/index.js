@@ -48,6 +48,12 @@ function getTraps() {
 
   const app = express();
 
+  // Prevent malicious sites from directly embedding this site.
+  app.use('/', (req, res, next) => {
+    res.set('X-Frame-Options', 'SAMEORIGIN');
+    next();
+  });
+
   // Register trap routes
   const trapRouter = express.Router();
   traps.forEach((trap) => {
