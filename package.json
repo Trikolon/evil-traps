@@ -12,7 +12,7 @@
   "repository": "github:Trikolon/evil-traps",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "glob": "^7.1.6"
   },
   "devDependencies": {
